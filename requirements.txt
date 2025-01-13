@@ -2,3 +2,4 @@ sqlalchemy
 asyncpg
 uvicorn
 pydantic
+pydantic-settings
