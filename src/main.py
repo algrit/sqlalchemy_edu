@@ -3,15 +3,16 @@ import asyncio
 from sqlalchemy import select, text
 
 from src.database import session_factory
+from src.models.base import Base
 
 
-async def get_123():
+async def create_tables():
     async with session_factory() as session:
-        res = await session.execute(text("SELECT 1,2,3"))
-        print(res.first())
+        await session.run_sync(Base.metadata.drop_all)
+        await session.run_sync(Base.metadata.create_all)
 
 
 
 
 if __name__ == '__main__':
-    asyncio.run(get_123())
+    asyncio.run(create_tables())
